@@ -1,2 +1,2 @@
-install.package('shiny')
-install.package('dplyr')
+install.packages('shiny')
+install.packages('dplyr')
