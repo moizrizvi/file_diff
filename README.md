@@ -7,6 +7,7 @@ https://moizrizvi.shinyapps.io/file_diff
 ## How to run it
 
 Run `install.R` or install the following packages in your terminal or RStudio:
+
 *dplyr
 *shiny
 
