@@ -8,8 +8,8 @@ https://moizrizvi.shinyapps.io/file_diff
 
 Run `install.R` or install the following packages in your terminal or RStudio:
 
-*dplyr
-*shiny
+* dplyr
+* shiny
 
 Then in the directory with `server.R` and `ui.R` run
 ```
