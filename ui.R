@@ -1,7 +1,7 @@
 library(shiny)
 
 shinyUI(fluidPage(
-  titlePanel("File diff"),
+  titlePanel("file diff"),
   sidebarLayout(
     sidebarPanel(
       helpText("Upload two datasets and see how they're different."),

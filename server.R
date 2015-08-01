@@ -1,5 +1,4 @@
 library(shiny)
-library(compare)
 library(dplyr)
 
 shinyServer(function(input, output) {
@@ -15,6 +14,13 @@ shinyServer(function(input, output) {
                     quote=input$quote)
     df2 <- read.csv(f2$datapath, header=input$header, sep=input$sep, 
                     quote=input$quote)
+    
+    if (nrow(df1) < nrow(df2)) {
+      tmp <- df1
+      df1 <- df2
+      df2 <- tmp
+    }
+
     if (input$join.type == 'anti')
       anti_join(df1,df2)
     else if (input$join.type == 'semi')
@@ -35,16 +41,23 @@ shinyServer(function(input, output) {
     df2 <- read.csv(f2$datapath, header=input$header, sep=input$sep, 
                     quote=input$quote)
     
+    
     if (input$join.type == 'anti') {
       if (nrow(df1) == nrow(df2))
-        return(paste("Here are the rows unique to either file."))
+        if (df1 == df2)
+          return("The two datasets are identical.")
+        else
+          return(paste("Here are the rows unique to either file."))
       else if (nrow(df1) > nrow(df2)) 
         return(paste("Here are the rows in ", toString(f1$name), "and not in ", toString(f2$name)))
       else
         return(paste("Here are the rows in ", toString(f2$name), "and not in ", toString(f1$name)))
     }
     else if (input$join.type == 'semi')
-      return(paste("Here are the rows in both ", toString(f1$name), "and in ", toString(f2$name)))
+      if (nrow(df1) == nrow(df2) && df1 == df2)
+        return("The two datasets are identical.")
+      else
+        return(paste("Here are the rows in both ", toString(f1$name), "and ", toString(f2$name)))
     else
       return(NULL)
   })
